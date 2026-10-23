@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff4e8">
+  <meta name="description" content="Adote um bichinho virtual e cuide dele em um cantinho cheio de carinho.">
+  <title>Meu Bichinho — um cantinho cheio de carinho</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Meu Bichinho, início">
+        <span class="brand-mark" aria-hidden="true">♡</span>
+        <span>meu <strong>bichinho</strong></span>
+      </a>
+      <div class="topbar-right">
+        <div class="coin-pill" aria-label="Saldo de moedas"><span aria-hidden="true">🪙</span><span id="coin-count">0</span></div>
+        <button class="icon-button" id="sound-toggle" type="button" aria-label="Ativar sons" title="Ativar ou desativar sons">🔇</button>
+        <button class="icon-button" id="reset-game" type="button" aria-label="Reiniciar jogo" title="Reiniciar jogo">↻</button>
+      </div>
+    </header>
+
+    <main class="page-layout">
+      <section class="pet-column" aria-label="Seu bichinho e cuidados">
+        <div class="welcome-row">
+          <div>
+            <p class="eyebrow">SEU CANTINHO FELIZ</p>
+            <h1>Oi, <span id="pet-name-heading">amigo</span>! <span class="wave">✦</span></h1>
+            <p class="subtitle">Um pouquinho de carinho muda tudo.</p>
+          </div>
+          <div class="level-badge"><span>⭐</span><span><strong id="level-number">Nível 1</strong><small><span id="xp-number">0</span> / <span id="xp-next">100</span> XP</small></span></div>
+        </div>
+
+        <div class="room" id="room">
+          <div class="room-window"><div class="window-sun"></div><span class="window-cloud cloud-one"></span><span class="window-cloud cloud-two"></span><div class="window-view"></div></div>
+          <span class="room-plant plant-left" aria-hidden="true">🪴</span>
+          <span class="room-lamp" aria-hidden="true">💡</span>
+          <span class="room-wall-art" aria-hidden="true">♡</span>
+          <div class="room-shelf" aria-hidden="true"><span>📚</span><span>🌼</span><span>🧸</span></div>
+          <div class="room-decor" id="room-decor" aria-hidden="true"></div>
+          <div class="floor"></div>
+          <div class="rug"></div>
+          <div class="pet-stage">
+            <div class="speech-bubble" id="pet-message" aria-live="polite">Que bom que você chegou! 💛</div>
+            <div class="pet" id="pet" data-mood="happy" aria-label="Seu bichinho virtual">
+              <span class="pet-accessory" id="pet-accessory"></span>
+              <span class="ear ear-left"></span><span class="ear ear-right"></span>
+              <span class="shark-fin shark-fin-dorsal"></span>
+              <span class="shark-fin shark-fin-left"></span><span class="shark-fin shark-fin-right"></span>
+              <span class="dragon-wing dragon-wing-left"></span><span class="dragon-wing dragon-wing-right"></span>
+              <span class="pet-body">
+                <span class="snout"></span><span class="gills gills-left"></span><span class="gills gills-right"></span>
+                <span class="cheek cheek-left"></span><span class="cheek cheek-right"></span>
+                <span class="eye eye-left"></span><span class="eye eye-right"></span>
+                <span class="nose"></span><span class="mouth"></span>
+                <span class="belly"></span>
+              </span>
+              <span class="foot foot-left"></span><span class="foot foot-right"></span>
+              <span class="pet-tail"></span>
+            </div>
+            <div class="pet-shadow"></div>
+            <div class="action-effect" id="action-effect" aria-hidden="true"></div>
+          </div>
+          <div class="room-caption"><span class="live-dot"></span><span id="room-caption">Um dia lindo para brincar!</span></div>
+        </div>
+
+        <div class="needs-grid" aria-label="Necessidades do bichinho">
+          <div class="need-card"><div class="need-heading"><span>🍓</span><span>Fome</span><strong id="hunger-value">80%</strong></div><div class="progress-track"><div class="progress-fill hunger-fill" id="hunger-bar"></div></div></div>
+          <div class="need-card"><div class="need-heading"><span>💖</span><span>Felicidade</span><strong id="happiness-value">80%</strong></div><div class="progress-track"><div class="progress-fill happiness-fill" id="happiness-bar"></div></div></div>
+          <div class="need-card"><div class="need-heading"><span>⚡</span><span>Energia</span><strong id="energy-value">80%</strong></div><div class="progress-track"><div class="progress-fill energy-fill" id="energy-bar"></div></div></div>
+          <div class="need-card"><div class="need-heading"><span>🫧</span><span>Higiene</span><strong id="hygiene-value">80%</strong></div><div class="progress-track"><div class="progress-fill hygiene-fill" id="hygiene-bar"></div></div></div>
+          <div class="need-card health-card"><div class="need-heading"><span>🌿</span><span>Saúde</span><strong id="health-value">100%</strong></div><div class="progress-track"><div class="progress-fill health-fill" id="health-bar"></div></div></div>
+        </div>
+
+        <section class="care-section">
+          <div class="section-heading"><div><p class="eyebrow">UM GESTO DE CADA VEZ</p><h2>Como vamos cuidar?</h2></div></div>
+          <div class="care-actions">
+            <button class="care-button" data-action="feed" type="button"><span class="care-icon feed-icon">🍎</span><strong>Alimentar</strong><small>delícia!</small></button>
+            <button class="care-button" data-action="play" type="button"><span class="care-icon play-icon">🪁</span><strong>Brincar</strong><small>vamos juntos</small></button>
+            <button class="care-button" data-action="bath" type="button"><span class="care-icon bath-icon">🛁</span><strong>Dar banho</strong><small>ficar limpinho</small></button>
+            <button class="care-button" data-action="pet" type="button"><span class="care-icon pet-icon">🤍</span><strong>Carinho</strong><small>abraço quentinho</small></button>
+            <button class="care-button" data-action="sleep" type="button"><span class="care-icon sleep-icon">🌙</span><strong id="sleep-label">Dormir</strong><small>descansar bem</small></button>
+          </div>
+        </section>
+
+        <section class="play-section">
+          <div class="section-heading"><div><p class="eyebrow">DIVERSÃO COM RECOMPENSA</p><h2>Hora de brincar! <span>🎮</span></h2></div></div>
+          <div class="game-cards">
+            <button class="game-card memory-card" data-game="memory" type="button"><span class="game-emoji">🃏</span><span><strong>Memória mágica</strong><small>Encontre os pares</small></span><span class="game-reward">+ moedas</span></button>
+            <button class="game-card stars-card" data-game="stars" type="button"><span class="game-emoji">⭐</span><span><strong>Caça às estrelas</strong><small>Toque para pegar!</small></span><span class="game-reward">+ moedas</span></button>
+          </div>
+        </section>
+      </section>
+
+      <aside class="side-column">
+        <section class="side-card pet-profile">
+          <div class="side-card-heading"><h2>Meu companheiro</h2><span class="more-dots">•••</span></div>
+          <div class="profile-main"><div class="profile-avatar" id="profile-avatar">🐰</div><div><h3 id="profile-name">Seu bichinho</h3><p id="profile-kind">Coelhinho · curioso</p></div></div>
+          <div class="profile-stats"><div><span>🧁</span><strong id="profile-age">0</strong><small>dias juntinhos</small></div><div><span>✨</span><strong id="profile-moments">0</strong><small>momentos</small></div><div><span>🏆</span><strong id="profile-achievements">0</strong><small>conquistas</small></div></div>
+          <div class="xp-section"><div class="xp-label"><span>Próximo nível</span><strong id="xp-percent">0%</strong></div><div class="progress-track xp-track"><div class="progress-fill xp-fill" id="xp-bar"></div></div></div>
+        </section>
+
+        <section class="side-card shop-card">
+          <div class="side-card-heading"><div><p class="eyebrow">UM MIMO PARA VOCÊS</p><h2>Lojinha <span>🛍️</span></h2></div><span class="shop-coins">🪙 <span id="shop-coins">0</span></span></div>
+          <div class="shop-tabs" role="tablist" aria-label="Categorias da loja">
+            <button class="shop-tab active" data-category="food" type="button">Comidinhas</button>
+            <button class="shop-tab" data-category="toys" type="button">Brinquedos</button>
+            <button class="shop-tab" data-category="style" type="button">Estilo</button>
+            <button class="shop-tab" data-category="room" type="button">Quarto</button>
+          </div>
+          <div class="shop-items" id="shop-items"></div>
+          <div class="inventory-line"><span>Na sua mochilinha:</span><strong id="inventory-summary">vazia por enquanto</strong></div>
+        </section>
+
+        <section class="side-card achievements-card">
+          <div class="side-card-heading"><div><p class="eyebrow">PEQUENAS GRANDES VITÓRIAS</p><h2>Conquistas <span>🏅</span></h2></div></div>
+          <div class="achievement-list" id="achievement-list"></div>
+        </section>
+
+        <section class="side-card album-card">
+          <div class="side-card-heading"><div><p class="eyebrow">LEMBRANÇAS QUERIDAS</p><h2>Álbum de momentos <span>📸</span></h2></div><button id="snapshot-button" class="text-button" type="button">+ registrar</button></div>
+          <div class="album-grid" id="album-grid"></div>
+        </section>
+        <p class="save-note"><span>☁️</span> Seu progresso fica salvo neste dispositivo.</p>
+      </aside>
+    </main>
+    <footer>Feito com carinho, para você e seu bichinho <span>♡</span></footer>
+  </div>
+
+  <div class="modal-backdrop hidden" id="adoption-modal" role="dialog" aria-modal="true" aria-labelledby="adoption-title">
+    <div class="modal-card adoption-card">
+      <span class="modal-sparkle sparkle-one">✦</span><span class="modal-sparkle sparkle-two">♡</span>
+      <p class="eyebrow">UM NOVO AMIGO ESTÁ CHEGANDO</p>
+      <h2 id="adoption-title">Quem vai morar<br>no seu cantinho?</h2>
+      <p class="modal-intro">Escolha seu companheiro e prepare-se para muitos momentos felizes.</p>
+      <div class="pet-choices" id="pet-choices"></div>
+      <label class="field-label" for="new-pet-name">Como vamos chamar?</label>
+      <input id="new-pet-name" class="name-input" type="text" maxlength="16" placeholder="Um nome bem especial" autocomplete="off">
+      <div class="color-picker"><span class="field-label">Cor do bichinho</span><div id="color-choices"></div></div>
+      <button class="primary-button adopt-button" id="adopt-button" type="button">Adotar com carinho <span>♡</span></button>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="game-modal" role="dialog" aria-modal="true" aria-labelledby="game-title">
+    <div class="modal-card game-modal-card">
+      <button class="modal-close" id="close-game" type="button" aria-label="Fechar jogo">×</button>
+      <p class="eyebrow">MINIJOGO</p><h2 id="game-title">Vamos jogar!</h2>
+      <p class="modal-intro" id="game-instructions"></p>
+      <div id="game-content"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
